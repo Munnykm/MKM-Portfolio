@@ -1,0 +1,650 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="Mondeep Kumar — Vehicle Architecture & Systems Engineering (E/E), Jaguar Land Rover." />:contentReference[oaicite:2]{index=2}ar | Systems Engineering</title>
+
+  <!-- Inter (optional, safe fallback) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg0:#060A12;
+      --bg1:#0A1223;
+      --card:#0E1830cc;
+      --card2:#0E1830f2;
+      --text:#EAF0FF;
+      --muted:#B6C3E6;
+      --line:#2A3B66;
+      --accent:#4AA3FF;
+      --accent2:#7C5CFF;
+      --good:#30D19B;
+      --warn:#FFB020;
+      --shadow: 0 18px 50px rgba(0,0,0,.45);
+      --radius: 18px;
+      --radius2: 24px;
+      --max: 1120px;
+    }
+
+    *{ box-sizing:border-box; }
+    html,body{ height:100%; }
+    body{
+      margin:0;
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(1200px 800px at 15% -10%, rgba(124,92,255,.35), transparent 55%),
+        radial-gradient(1100px 750px at 85% 0%, rgba(74,163,255,.35), transparent 60%),
+        radial-gradient(900px 600px at 35% 90%, rgba(48,209,155,.20), transparent 60%),
+        linear-gradient(180deg, var(--bg0), var(--bg1));
+      overflow-x:hidden;
+    }
+
+    a{ color:inherit; text-decoration:none; }
+    .wrap{ max-width:var(--max); margin:0 auto; padding:28px 18px 80px; }
+
+    /* Top bar */
+    .topbar{
+      display:flex; align-items:center; justify-content:space-between;
+      gap:14px; padding:12px 14px;
+      background: rgba(255,255,255,.04);
+      border:1px solid rgba(255,255,255,.08);
+      border-radius: 999px;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 10px 30px rgba(0,0,0,.22);
+      position: sticky; top: 14px; z-index: 10;
+    }
+    .brand{ display:flex; align-items:center; gap:10px; font-weight:700; letter-spacing:.2px; }
+    .dot{
+      width:12px; height:12px; border-radius:999px;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      box-shadow: 0 0 0 4px rgba(74,163,255,.15);
+    }
+    .nav{
+      display:flex; gap:14px; flex-wrap:wrap; justify-content:flex-end;
+      font-size:14px; color:var(--muted);
+    }
+    .nav a{ padding:8px 10px; border-radius:999px; }
+    .nav a:hover{ background: rgba(255,255,255,.06); color:var(--text); }
+
+    /* Hero */
+    .hero{
+      margin-top:26px;
+      display:grid;
+      grid-template-columns: 1.3fr .7fr;
+      gap:18px;
+      align-items:stretch;
+    }
+    @media (max-width: 900px){
+      .hero{ grid-template-columns: 1fr; }
+      .topbar{ position: static; }
+    }
+    .card{
+      background: var(--card);
+      border: 1px solid rgba(255,255,255,.10);
+      border-radius: var(--radius2);
+      backdrop-filter: blur(12px);
+      box-shadow: var(--shadow);
+    }
+    .heroMain{ padding:26px; }
+    .kicker{
+      display:inline-flex; gap:10px; align-items:center;
+      font-size:13px; color:var(--muted);
+      padding:8px 12px; border-radius:999px;
+      background: rgba(255,255,255,.06);
+      border:1px solid rgba(255,255,255,.08);
+    }
+    .kicker b{ color:var(--text); font-weight:600; }
+    h1{
+      margin:14px 0 10px;
+      font-size:44px; line-height:1.06;
+      letter-spacing:-.6px;
+    }
+    @media (max-width: 520px){
+      h1{ font-size:34px; }
+    }
+    .lead{
+      margin:0 0 16px;
+      color:var(--muted);
+      font-size:16px;
+      line-height:1.6;
+      max-width: 64ch;
+    }
+    .ctaRow{ display:flex; gap:12px; flex-wrap:wrap; margin-top:10px; }
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      gap:10px;
+      padding:12px 14px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.06);
+      color: var(--text);
+      font-weight:600;
+      font-size:14px;
+      transition: transform .12s ease, background .12s ease, border .12s ease;
+    }
+    .btn:hover{ transform: translateY(-1px); background: rgba(255,255,255,.09); border-color: rgba(255,255,255,.14); }
+    .btn.primary{
+      background: linear-gradient(135deg, rgba(74,163,255,.95), rgba(124,92,255,.92));
+      border-color: rgba(255,255,255,.18);
+    }
+
+    /* Side panel */
+    .heroSide{ padding:18px; display:flex; flex-direction:column; gap:12px; }
+    .mini{
+      background: rgba(0,0,0,.18);
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 16px;
+      padding:14px;
+    }
+    .mini h3{ margin:0 0 8px; font-size:14px; color:var(--muted); font-weight:600; }
+    .pillRow{ display:flex; gap:8px; flex-wrap:wrap; }
+    .pill{
+      font-size:12px; color:var(--text);
+      padding:8px 10px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.08);
+      white-space:nowrap;
+    }
+    .pill.good{ border-color: rgba(48,209,155,.35); background: rgba(48,209,155,.10); }
+    .pill.warn{ border-color: rgba(255,176,32,.35); background: rgba(255,176,32,.10); }
+
+    /* Section */
+    section{ margin-top:22px; }
+    .sectionHead{
+      display:flex; align-items:flex-end; justify-content:space-between; gap:14px;
+      margin: 24px 0 10px;
+    }
+    .sectionHead h2{
+      margin:0;
+      font-size:18px;
+      letter-spacing:.2px;
+    }
+    .sectionHead p{
+      margin:0;
+      color:var(--muted);
+      font-size:13px;
+    }
+
+    /* Timeline (Office Timeline-ish) */
+    .timelineCard{ padding:18px; overflow:hidden; }
+    .timelineTop{
+      display:flex; align-items:center; justify-content:space-between; gap:12px;
+      margin-bottom:12px;
+    }
+    .zoom{
+      display:flex; gap:10px; align-items:center; color:var(--muted); font-size:13px;
+    }
+    .zoom input{ width:160px; }
+    .trackWrap{
+      overflow:auto;
+      padding-bottom:10px;
+    }
+    .track{
+      min-width: 980px;
+      padding: 18px 14px 22px;
+      border-radius: 16px;
+      background: rgba(0,0,0,.20);
+      border:1px solid rgba(255,255,255,.08);
+    }
+    .scale{
+      position:relative;
+      height:34px;
+      border-radius: 12px;
+      background: linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.05));
+      border:1px solid rgba(255,255,255,.10);
+      overflow:hidden;
+    }
+    .scale::before{
+      content:"";
+      position:absolute; inset:0;
+      background:
+        repeating-linear-gradient(
+          90deg,
+          rgba(255,255,255,.14) 0px,
+          rgba(255,255,255,.14) 1px,
+          transparent 1px,
+          transparent 80px
+        );
+      opacity:.65;
+      pointer-events:none;
+    }
+    .scaleLabels{
+      position:absolute; inset:0;
+      display:flex; justify-content:space-between; align-items:center;
+      padding:0 10px;
+      font-size:12px; color:rgba(234,240,255,.80);
+      letter-spacing:.2px;
+    }
+
+    .lanes{
+      margin-top:12px;
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+    }
+    .lane{
+      display:grid;
+      grid-template-columns: 180px 1fr;
+      gap:12px;
+      align-items:center;
+    }
+    .laneName{
+      font-size:12px;
+      color:var(--muted);
+      display:flex;
+      align-items:center;
+      gap:10px;
+      padding:10px 12px;
+      border-radius: 14px;
+      background: rgba(255,255,255,.05);
+      border:1px solid rgba(255,255,255,.08);
+      height: 54px;
+    }
+    .laneName b{ color:var(--text); font-weight:600; }
+
+    .laneBar{
+      position:relative;
+      height:54px;
+      border-radius: 14px;
+      background: rgba(255,255,255,.04);
+      border:1px solid rgba(255,255,255,.08);
+      overflow:hidden;
+    }
+    .item{
+      position:absolute;
+      top:10px;
+      height:34px;
+      border-radius: 12px;
+      display:flex;
+      align-items:center;
+      padding:0 10px;
+      font-size:13px;
+      white-space:nowrap;
+      border:1px solid rgba(255,255,255,.18);
+      box-shadow: 0 10px 26px rgba(0,0,0,.35);
+      overflow:hidden;
+      text-overflow:ellipsis;
+      max-width: 95%;
+    }
+    .item .sub{
+      font-size:12px;
+      opacity:.85;
+      margin-left:10px;
+      color: rgba(234,240,255,.90);
+    }
+    .item.blue{ background: rgba(74,163,255,.22); }
+    .item.purple{ background: rgba(124,92,255,.22); }
+    .item.green{ background: rgba(48,209,155,.18); }
+    .item.orange{ background: rgba(255,176,32,.18); }
+
+    .milestone{
+      position:absolute;
+      top:6px;
+      width:10px;
+      height:42px;
+      border-radius: 999px;
+      background: rgba(234,240,255,.24);
+      border:1px solid rgba(255,255,255,.22);
+    }
+    .milestone::after{
+      content:"";
+      position:absolute;
+      top:-8px; left:50%;
+      width:10px; height:10px;
+      transform: translateX(-50%);
+      border-radius: 999px;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      box-shadow: 0 0 0 4px rgba(74,163,255,.14);
+    }
+    .milestoneLabel{
+      position:absolute;
+      top:-28px;
+      transform: translateX(-50%);
+      font-size:11px;
+      color: rgba(234,240,255,.80);
+      white-space:nowrap;
+    }
+
+    /* Grid blocks */
+    .grid2{ display:grid; grid-template-columns: 1fr 1fr; gap:18px; }
+    @media (max-width: 900px){ .grid2{ grid-template-columns: 1fr; } }
+    .block{ padding:18px; }
+    .block h3{ margin:0 0 10px; font-size:14px; color:var(--muted); font-weight:700; letter-spacing:.2px; }
+    ul{ margin:0; padding-left:18px; color:var(--muted); line-height:1.7; }
+    li{ margin:6px 0; }
+
+    /* Footer */
+    footer{
+      margin-top:26px;
+      padding:18px;
+      color: rgba(234,240,255,.70);
+      font-size:13px;
+      text-align:center;
+    }
+    .fine{ color: rgba(234,240,255,.55); font-size:12px; margin-top:8px; }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <div class="topbar">
+      <div class="brand">
+        <span class="dot"></span>
+        <span>Mondeep Kumar</span>
+      </div>
+      <nav class="nav">
+        <a href="#about">About</a>
+        <a href="#timeline">Timeline</a>
+        <a href="#competencies">Competencies</a>
+        <a href="#education">Education</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+
+    <header class="hero">
+      <div class="card heroMain">
+        <div class="kicker">
+          <span>Vehicle Architecture • E/E • Systems Engineering</span>
+          <span style="opacity:.55">|</span>
+          <b>10+ years</b>
+        </div>
+
+        <h1>Platform-level E/E systems engineering with a focus on robustness, diagnostics, and scalable architectures.</h1>
+
+        <p class="lead">
+          Vehicle Architecture and Systems Engineering professional with experience at Jaguar Land Rover,
+          specialising in platform-level electrical, electronic, and software-enabled system architectures.
+          Skilled in component capability definition, failure-mode thinking, and designing for diagnosability and reuse.
+        </p>
+
+        <div class="ctaRow">
+          <a class="btn primary" href="#timeline">View experience timeline</a>
+          <a class="btn" href="#contact">Get in touch</a>
+          <a class="btn" href="https://www.linkedin.com/in/mondeepkumar" target="_blank" rel="noreferrer">LinkedIn</a>
+        </div>
+
+        <p class="fine">
+          Tip: remove personal address/phone for a public site. Keep contact via LinkedIn or a dedicated email alias.
+        </p>
+      </div>
+
+      <aside class="card heroSide">
+        <div class="mini">
+          <h3>Current focus</h3>
+          <div class="pillRow">
+            <span class="pill good">System behaviour definition</span>
+            <span class="pill good">Edge / degraded modes</span>
+            <span class="pill good">Design for diagnostics</span>
+            <span class="pill">E/E architecture</span>
+            <span class="pill">DFMEA</span>
+          </div>
+        </div>
+
+        <div class="mini">
+          <h3>Tooling</h3>
+          <div class="pillRow">
+            <span class="pill">Excel / PowerPoint / Visio</span>
+            <span class="pill">Lucidcharts</span>
+            <span class="pill warn">JIRA</span>
+            <span class="pill">Siemens Capital</span>
+          </div>
+        </div>
+
+        <div class="mini">
+          <h3>Location</h3>
+          <div class="pillRow">
+            <span class="pill">UK (Coventry)</span>
+            <span class="pill">British</span>
+          </div>
+        </div>
+      </aside>
+    </header>
+
+    <section id="about">
+      <div class="sectionHead">
+        <h2>About</h2>
+        <p>What I do, in systems-engineering terms</p>
+      </div>
+
+      <div class="card block">
+        <ul>
+          <li>Define end-to-end electrical/electronic system behaviour across operational, environmental, and degraded scenarios.</li>
+          <li>Translate platform/vehicle requirements into component capability expectations, interfaces (connectivity), and constraints.</li>
+          <li>Lead system-level DFMEA and resilience strategy: edge cases, fault conditions, integration variability, graceful degradation.</li>
+          <li>Shape diagnostic strategies and fault containment to improve detectability and in-vehicle robustness.</li>
+          <li>Feed lessons learned into design rules and engineering tooling to prevent defect recurrence.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="timeline">
+      <div class="sectionHead">
+        <h2>Experience timeline</h2>
+        <p>Office Timeline–style roadmap view</p>
+      </div>
+
+      <div class="card timelineCard">
+        <div class="timelineTop">
+          <div style="display:flex;flex-direction:column;gap:4px">
+            <div style="font-weight:700; letter-spacing:.2px;">Career roadmap</div>
+            <div style="color:var(--muted); font-size:13px;">Drag horizontally • Use zoom to scale the timeline</div>
+          </div>
+          <div class="zoom">
+            <span>Zoom</span>
+            <input id="zoom" type="range" min="70" max="140" value="100" />
+            <span id="zoomLabel">100%</span>
+          </div>
+        </div>
+
+        <div class="trackWrap">
+          <div class="track" id="track">
+            <div class="scale">
+              <div class="scaleLabels">
+                <span>1998</span><span>2006</span><span>2010</span><span>2021</span><span>Present</span>
+              </div>
+            </div>
+
+            <div class="lanes" id="lanes">
+              <!-- injected by JS -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="competencies">
+      <div class="sectionHead">
+        <h2>Core competencies</h2>
+        <p>Systems engineering + E/E + quality mindset</p>
+      </div>
+
+      <div class="grid2">
+        <div class="card block">
+          <h3>Systems engineering</h3>
+          <ul>
+            <li>V-Model, functional decomposition, requirements & acceptance criteria</li>
+            <li>System behaviour and failure-mode definition</li>
+            <li>DFMEA leadership and mitigation closure</li>
+            <li>Safety-critical degraded-mode thinking</li>
+          </ul>
+        </div>
+
+        <div class="card block">
+          <h3>E/E architecture & governance</h3>
+          <ul>
+            <li>Platform-level E/E architecture, interfaces and constraints</li>
+            <li>Component capability & robustness definition</li>
+            <li>Design for diagnostics & fault containment</li>
+            <li>Cross-functional and supplier technical governance</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="education">
+      <div class="sectionHead">
+        <h2>Education</h2>
+        <p>Academic foundation</p>
+      </div>
+
+      <div class="card block">
+        <ul>
+          <li><b>BSc (Hons) Engineering Information Technology</b>, DeMontfort University, Leicester (1994–1998) — 2:1</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="sectionHead">
+        <h2>Contact</h2>
+        <p>Recommended: keep public contact minimal</p>
+      </div>
+
+      <div class="grid2">
+        <div class="card block">
+          <h3>Preferred</h3>
+          <ul>
+            <li><a href="https://www.linkedin.com/in/mondeepkumar" target="_blank" rel="noreferrer">LinkedIn profile</a></li>
+            <li>Email (optional): <span style="color:var(--text)">your.email@domain.com</span></li>
+          </ul>
+        </div>
+
+        <div class="card block">
+          <h3>Public-site hygiene</h3>
+          <ul>
+            <li>Don’t publish home address / personal phone on a public portfolio.</li>
+            <li>Use a contact form or a dedicated email alias if you want direct inbound.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <footer class="card">
+      <div>© <span id="year"></span> Mondeep Kumar • Built with a timeline/roadmap aesthetic</div>
+      <div class="fine">Single-file site (HTML/CSS/JS). Host on GitHub Pages / Netlify / any static host.</div>
+    </footer>
+  </div>
+
+  <script>
+    // Timeline model (positions are percentages along the lane bar).
+    // You can edit these labels or add new roles/milestones.
+    const lanes = [
+      {
+        laneLabel: "Jaguar Land Rover",
+        laneSub: "Systems Eng",
+        items: [
+          { label: "EDS Electrical Systems Engineer", sub: "2021–Present", left: 72, width: 26, tone: "blue" }
+        ],
+        milestones: [
+          { at: 72, label: "2021" },
+          { at: 98, label: "Now" }
+        ]
+      },
+      {
+        laneLabel: "Jaguar Land Rover",
+        laneSub: "Design Eng",
+        items: [
+          { label: "EDS Electrical Design Engineer", sub: "2010–2021", left: 40, width: 32, tone: "purple" }
+        ],
+        milestones: [
+          { at: 40, label: "2010" },
+          { at: 72, label: "2021" }
+        ]
+      },
+      {
+        laneLabel: "NHS / Health IT",
+        laneSub: "Analytics",
+        items: [
+          { label: "Data / Business Analyst", sub: "2006–2010", left: 26, width: 14, tone: "green" }
+        ],
+        milestones: [
+          { at: 26, label: "2006" },
+          { at: 40, label: "2010" }
+        ]
+      },
+      {
+        laneLabel: "LEONI Wiring Systems",
+        laneSub: "Dev / Systems",
+        items: [
+          { label: "Graduate Analyst Developer / Systems Analyst", sub: "1998–2006", left: 6, width: 20, tone: "orange" }
+        ],
+        milestones: [
+          { at: 6, label: "1998" },
+          { at: 26, label: "2006" }
+        ]
+      }
+    ];
+
+    const lanesEl = document.getElementById("lanes");
+
+    function render(){
+      lanesEl.innerHTML = "";
+      lanes.forEach((ln) => {
+        const lane = document.createElement("div");
+        lane.className = "lane";
+
+        const name = document.createElement("div");
+        name.className = "laneName";
+        name.innerHTML = `<div><b>${ln.laneLabel}</b><div style="margin-top:2px; font-size:12px; color:rgba(234,240,255,.70)">${ln.laneSub}</div></div>`;
+        lane.appendChild(name);
+
+        const bar = document.createElement("div");
+        bar.className = "laneBar";
+
+        // milestones
+        (ln.milestones || []).forEach(m => {
+          const ms = document.createElement("div");
+          ms.className = "milestone";
+          ms.style.left = `${m.at}%`;
+
+          const lbl = document.createElement("div");
+          lbl.className = "milestoneLabel";
+          lbl.style.left = `${m.at}%`;
+          lbl.textContent = m.label;
+
+          bar.appendChild(ms);
+          bar.appendChild(lbl);
+        });
+
+        // items
+        (ln.items || []).forEach(it => {
+          const item = document.createElement("div");
+          item.className = `item ${it.tone || "blue"}`;
+          item.style.left = `${it.left}%`;
+          item.style.width = `${it.width}%`;
+          item.innerHTML = `<span>${it.label}</span><span class="sub">${it.sub || ""}</span>`;
+          bar.appendChild(item);
+        });
+
+        lane.appendChild(bar);
+        lanesEl.appendChild(lane);
+      });
+    }
+
+    render();
+
+    // Zoom control: scales the whole track (Office Timeline-ish “timeline zoom” feel).
+    const zoom = document.getElementById("zoom");
+    const zoomLabel = document.getElementById("zoomLabel");
+    const track = document.getElementById("track");
+
+    function setZoom(val){
+      zoomLabel.textContent = `${val}%`;
+      track.style.transformOrigin = "top left";
+      track.style.transform = `scale(${val/100})`;
+      // Keep layout stable: add bottom padding compensation
+      track.parentElement.style.paddingBottom = (val/100 > 1 ? (val-100) * 2 : 10) + "px";
+    }
+    zoom.addEventListener("input", (e) => setZoom(Number(e.target.value)));
+    setZoom(Number(zoom.value));
+
+    // Footer year
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
