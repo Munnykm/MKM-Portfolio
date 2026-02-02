@@ -85,17 +85,27 @@
     .nav a:hover{ background: rgba(255,255,255,.06); color:var(--text); }
 
     /* Hero */
-    .hero{
-      margin-top:26px;
-      display:grid;
-      grid-template-columns: 1.3fr .7fr;
-      gap:18px;
-      align-items:stretch;
-    }
-    @media (max-width: 900px){
-      .hero{ grid-template-columns: 1fr; }
-      .topbar{ position: static; }
-    }
+  .hero{
+  position: relative; /* important */
+}
+
+/* Decorative sketch */
+.heroSketch{
+  position: absolute;
+  top: -20px;
+  right: -40px;
+  width: 420px;
+  max-width: 45%;
+  opacity: 0.12;              /* subtle, premium */
+  pointer-events: none;       /* purely decorative */
+  filter: grayscale(100%) contrast(1.1);
+}
+
+@media (max-width: 900px){
+  .heroSketch{
+    display: none; /* hide on mobile */
+  }
+}
     .card{
       background: var(--card);
       border: 1px solid rgba(255,255,255,.10);
