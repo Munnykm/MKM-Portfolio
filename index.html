@@ -1,691 +1,1029 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <meta name="description" content="Mondeep Kumar — Vehicle Architecture & Systems Engineering (E/E), Jaguar Land Rover." />
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <meta name="description" content="Mondeep Kumar — Vehicle Architecture & E/E Systems Engineering, Jaguar Land Rover."/>
+  <title>Mondeep Kumar — Systems Engineer</title>
 
-  <!-- Inter (optional, safe fallback) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;700&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet">
 
   <style>
-  :root{
-  /* Backgrounds */
-  --bg0:#F5F6F8;          /* off-white */
-  --bg1:#ECEEF1;          /* light grey */
-
-  /* Surfaces / cards */
-  --card:#FFFFFFcc;
-  --card2:#FFFFFFf2;
-
-  /* Text */
-  --text:#1F2937;         /* dark charcoal */
-  --muted:#4B5563;        /* muted grey */
-
-  /* Lines / borders */
-  --line:#D1D5DB;
-
-  /* Accents (professional blue-grey) */
-  --accent:#2563EB;       /* muted blue */
-  --accent2:#64748B;      /* slate */
-
-  /* Status */
-  --good:#059669;
-  --warn:#D97706;
-
-  /* Shadows */
-  --shadow: 0 12px 30px rgba(0,0,0,.08);
-
-  --radius: 18px;
-  --radius2: 24px;
-  --max: 1120px;
-}
-
-    *{ box-sizing:border-box; }
-    html,body{ height:100%; }
-    body{
-      margin:0;
-      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      color:var(--text);
-      background:
-        radial-gradient(1200px 800px at 15% -10%, rgba(124,92,255,.35), transparent 55%),
-        radial-gradient(1100px 750px at 85% 0%, rgba(74,163,255,.35), transparent 60%),
-        radial-gradient(900px 600px at 35% 90%, rgba(48,209,155,.20), transparent 60%),
-        linear-gradient(180deg, var(--bg0), var(--bg1));
-      overflow-x:hidden;
+    :root {
+      --navy:    #0D1B2A;
+      --navy2:   #162233;
+      --slate:   #2C4A6E;
+      --teal:    #1E6A7A;
+      --gold:    #C5993A;
+      --gold2:   #E8B84B;
+      --offwhite:#F4F1EC;
+      --cream:   #EDE9E1;
+      --line:    rgba(255,255,255,.10);
+      --linedk:  #D4CCBE;
+      --text:    #F0EDE8;
+      --muted:   rgba(240,237,232,.62);
+      --muted2:  rgba(240,237,232,.40);
+      --radius:  6px;
+      --max:     1080px;
     }
 
-    a{ color:inherit; text-decoration:none; }
-    .wrap{ max-width:var(--max); margin:0 auto; padding:28px 18px 80px; }
+    *, *::before, *::after { box-sizing:border-box; margin:0; padding:0; }
+    html { scroll-behavior: smooth; }
 
-    /* Top bar */
-    .topbar{
-      display:flex; align-items:center; justify-content:space-between;
-      gap:14px; padding:12px 14px;
-      background: rgba(255,255,255,.04);
-      border:1px solid rgba(255,255,255,.08);
-      border-radius: 999px;
-      backdrop-filter: blur(10px);
-      box-shadow: 0 10px 30px rgba(0,0,0,.22);
-      position: sticky; top: 14px; z-index: 10;
-    }
-    .brand{ display:flex; align-items:center; gap:12px; font-weight:800; font-size:20px; letter-spacing:.4px; text-shadow: 0 0 14px rgba(74,163,255,.35); }
-    .dot{
-      width:12px; height:12px; border-radius:999px;
-      background: linear-gradient(135deg, var(--accent), var(--accent2));
-      box-shadow: 0 0 0 4px rgba(74,163,255,.15);
-    }
-    .nav{
-      display:flex; gap:14px; flex-wrap:wrap; justify-content:flex-end;
-      font-size:14px; color:var(--muted);
-    }
-    .nav a{ padding:8px 10px; border-radius:999px; }
-    .nav a:hover{ background: rgba(255,255,255,.06); color:var(--text); }
-
-    /* Hero */
-  .hero{
-  position: relative; /* important */
-}
-
-/* Decorative sketch */
-.heroSketch{
-  position: absolute;
-  top: -20px;
-  right: -40px;
-  width: 420px;
-  max-width: 45%;
-  opacity: 0.12;              /* subtle, premium */
-  pointer-events: none;       /* purely decorative */
-  filter: grayscale(100%) contrast(1.1);
-}
-
-@media (max-width: 900px){
-  .heroSketch{
-    display: none; /* hide on mobile */
-  }
-}
-    .card{
-      background: var(--card);
-      border: 1px solid rgba(255,255,255,.10);
-      border-radius: var(--radius2);
-      backdrop-filter: blur(12px);
-      box-shadow: var(--shadow);
-    }
-    .heroMain{ padding:26px; }
-    .kicker{
-      display:inline-flex; gap:10px; align-items:center;
-      font-size:13px; color:var(--muted);
-      padding:8px 12px; border-radius:999px;
-      background: rgba(255,255,255,.06);
-      border:1px solid rgba(255,255,255,.08);
-    }
-    .kicker b{ color:var(--text); font-weight:600; }
-    h1{
-      margin:14px 0 10px;
-      font-size:44px; line-height:1.06;
-      letter-spacing:-.6px;
-    }
-    @media (max-width: 520px){
-      h1{ font-size:34px; }
-    }
-    .lead{
-      margin:0 0 16px;
-      color:var(--muted);
-      font-size:16px;
-      line-height:1.6;
-      max-width: 64ch;
-    }
-    .ctaRow{ display:flex; gap:12px; flex-wrap:wrap; margin-top:10px; }
-    .btn{
-      display:inline-flex; align-items:center; justify-content:center;
-      gap:10px;
-      padding:12px 14px;
-      border-radius: 14px;
-      border: 1px solid rgba(255,255,255,.10);
-      background: rgba(255,255,255,.06);
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--navy);
       color: var(--text);
-      font-weight:600;
-      font-size:14px;
-      transition: transform .12s ease, background .12s ease, border .12s ease;
-    }
-    .btn:hover{ transform: translateY(-1px); background: rgba(255,255,255,.09); border-color: rgba(255,255,255,.14); }
-    .btn.primary{
-      background: linear-gradient(135deg, rgba(74,163,255,.95), rgba(124,92,255,.92));
-      border-color: rgba(255,255,255,.18);
+      line-height: 1.65;
+      overflow-x: hidden;
     }
 
-    /* Side panel */
-    .heroSide{ padding:18px; display:flex; flex-direction:column; gap:12px; }
-    .mini{
-      background: rgba(0,0,0,.18);
-      border: 1px solid rgba(255,255,255,.08);
-      border-radius: 16px;
-      padding:14px;
-    }
-    .mini h3{ margin:0 0 8px; font-size:14px; color:var(--muted); font-weight:600; }
-    .pillRow{ display:flex; gap:8px; flex-wrap:wrap; }
-    .pill{
-      font-size:12px; color:var(--text);
-      padding:8px 10px;
-      border-radius: 999px;
-      background: rgba(255,255,255,.06);
-      border: 1px solid rgba(255,255,255,.08);
-      white-space:nowrap;
-    }
-    .pill.good{ border-color: rgba(48,209,155,.35); background: rgba(48,209,155,.10); }
-    .pill.warn{ border-color: rgba(255,176,32,.35); background: rgba(255,176,32,.10); }
+    a { color: inherit; text-decoration: none; }
+    img { display: block; }
 
-    /* Section */
-    section{ margin-top:22px; }
-    .sectionHead{
-      display:flex; align-items:flex-end; justify-content:space-between; gap:14px;
-      margin: 24px 0 10px;
+    /* ─── NAV ─── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 40px;
+      height: 60px;
+      background: rgba(13,27,42,.92);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--line);
     }
-    .sectionHead h2{
-      margin:0;
-      font-size:18px;
-      letter-spacing:.2px;
+    .nav-brand {
+      font-family: 'Playfair Display', serif;
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: .5px;
+      color: var(--gold2);
     }
-    .sectionHead p{
-      margin:0;
-      color:var(--muted);
-      font-size:13px;
+    .nav-links {
+      display: flex;
+      gap: 6px;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--muted);
+      padding: 6px 14px;
+      border-radius: 4px;
+      letter-spacing: .3px;
+      transition: color .2s, background .2s;
+    }
+    .nav-links a:hover { color: var(--text); background: rgba(255,255,255,.07); }
+
+    @media (max-width: 640px) {
+      nav { padding: 0 20px; }
+      .nav-links { display: none; }
     }
 
-    /* Timeline (Office Timeline-ish) */
-    .timelineCard{ padding:18px; overflow:hidden; }
-    .timelineTop{
-      display:flex; align-items:center; justify-content:space-between; gap:12px;
-      margin-bottom:12px;
+    /* ─── HERO ─── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 100px 40px 80px;
+      position: relative;
+      overflow: hidden;
     }
-    .zoom{
-      display:flex; gap:10px; align-items:center; color:var(--muted); font-size:13px;
-    }
-    .zoom input{ width:160px; }
-    .trackWrap{
-      overflow:auto;
-      padding-bottom:10px;
-    }
-    .track{
-      min-width: 980px;
-      padding: 18px 14px 22px;
-      border-radius: 16px;
-      background: rgba(0,0,0,.20);
-      border:1px solid rgba(255,255,255,.08);
-    }
-    .scale{
-      position:relative;
-      height:34px;
-      border-radius: 12px;
-      background: linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.05));
-      border:1px solid rgba(255,255,255,.10);
-      overflow:hidden;
-    }
-    .scale::before{
-      content:"";
-      position:absolute; inset:0;
+    .hero-bg {
+      position: absolute;
+      inset: 0;
       background:
-        repeating-linear-gradient(
-          90deg,
-          rgba(255,255,255,.14) 0px,
-          rgba(255,255,255,.14) 1px,
-          transparent 1px,
-          transparent 80px
-        );
-      opacity:.65;
-      pointer-events:none;
+        radial-gradient(ellipse 900px 600px at 80% 30%, rgba(30,106,122,.18), transparent 65%),
+        radial-gradient(ellipse 700px 500px at 10% 80%, rgba(44,74,110,.22), transparent 60%);
+      pointer-events: none;
     }
-    .scaleLabels{
-      position:absolute; inset:0;
-      display:flex; justify-content:space-between; align-items:center;
-      padding:0 10px;
-      font-size:12px; color:rgba(234,240,255,.80);
-      letter-spacing:.2px;
+    /* Decorative circuit line art */
+    .hero-lines {
+      position: absolute;
+      right: 0; top: 0;
+      width: 45%;
+      height: 100%;
+      opacity: .045;
+      pointer-events: none;
+      overflow: hidden;
+    }
+    .hero-lines svg { width: 100%; height: 100%; }
+
+    .hero-inner {
+      position: relative;
+      z-index: 1;
+      max-width: var(--max);
+      margin: 0 auto;
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1fr 340px;
+      gap: 60px;
+      align-items: start;
+    }
+    @media (max-width: 900px) {
+      .hero-inner { grid-template-columns: 1fr; gap: 40px; }
+      .hero-lines { display: none; }
     }
 
-    .lanes{
-      margin-top:12px;
-      display:flex;
-      flex-direction:column;
-      gap:12px;
+    .hero-eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 24px;
     }
-    .lane{
-      display:grid;
-      grid-template-columns: 180px 1fr;
-      gap:12px;
-      align-items:center;
+    .eyebrow-line {
+      width: 40px; height: 1px;
+      background: var(--gold);
     }
-    .laneName{
-      font-size:12px;
-      color:var(--muted);
-      display:flex;
-      align-items:center;
-      gap:10px;
-      padding:10px 12px;
-      border-radius: 14px;
-      background: rgba(255,255,255,.05);
-      border:1px solid rgba(255,255,255,.08);
-      height: 54px;
+    .eyebrow-text {
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--gold);
     }
-    .laneName b{ color:var(--text); font-weight:600; }
 
-    .laneBar{
-      position:relative;
-      height:54px;
-      border-radius: 14px;
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(38px, 5vw, 60px);
+      font-weight: 700;
+      line-height: 1.08;
+      letter-spacing: -.5px;
+      margin-bottom: 20px;
+    }
+    h1 em {
+      font-style: italic;
+      color: var(--gold2);
+    }
+
+    .hero-lead {
+      font-size: 16px;
+      font-weight: 300;
+      color: var(--muted);
+      line-height: 1.75;
+      max-width: 58ch;
+      margin-bottom: 36px;
+    }
+
+    .hero-cta {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 13px 26px;
+      border-radius: var(--radius);
+      background: var(--gold);
+      color: var(--navy);
+      font-weight: 600;
+      font-size: 14px;
+      letter-spacing: .3px;
+      transition: background .2s, transform .15s;
+    }
+    .btn-primary:hover { background: var(--gold2); transform: translateY(-1px); }
+    .btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 13px 26px;
+      border-radius: var(--radius);
+      border: 1px solid rgba(255,255,255,.18);
+      color: var(--text);
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: .3px;
+      transition: border-color .2s, background .2s, transform .15s;
+    }
+    .btn-ghost:hover { border-color: rgba(255,255,255,.35); background: rgba(255,255,255,.05); transform: translateY(-1px); }
+
+    /* Hero sidebar */
+    .hero-card {
       background: rgba(255,255,255,.04);
-      border:1px solid rgba(255,255,255,.08);
-      overflow:hidden;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
     }
-    .item{
-      position:absolute;
-      top:10px;
-      height:34px;
-      border-radius: 12px;
-      display:flex;
-      align-items:center;
-      padding:0 10px;
-      font-size:13px;
-      white-space:nowrap;
-      border:1px solid rgba(255,255,255,.18);
-      box-shadow: 0 10px 26px rgba(0,0,0,.35);
-      overflow:hidden;
-      text-overflow:ellipsis;
-      max-width: 95%;
+    .hc-block h4 {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 10px;
     }
-    .item .sub{
-      font-size:12px;
-      opacity:.85;
-      margin-left:10px;
-      color: rgba(234,240,255,.90);
+    .pill-grid { display: flex; flex-wrap: wrap; gap: 7px; }
+    .pill {
+      font-size: 12px;
+      font-weight: 400;
+      padding: 5px 11px;
+      border-radius: 3px;
+      border: 1px solid rgba(255,255,255,.13);
+      color: var(--muted);
+      white-space: nowrap;
     }
-    .item.blue{ background: rgba(74,163,255,.22); }
-    .item.purple{ background: rgba(124,92,255,.22); }
-    .item.green{ background: rgba(48,209,155,.18); }
-    .item.orange{ background: rgba(255,176,32,.18); }
+    .pill.hi { border-color: rgba(197,153,58,.40); color: var(--gold2); background: rgba(197,153,58,.08); }
+    .hc-divider { height: 1px; background: var(--line); }
 
-    .milestone{
-      position:absolute;
-      top:6px;
-      width:10px;
-      height:42px;
-      border-radius: 999px;
-      background: rgba(234,240,255,.24);
-      border:1px solid rgba(255,255,255,.22);
+    /* ─── SECTION WRAPPER ─── */
+    .section {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 80px 40px;
     }
-    .milestone::after{
-      content:"";
-      position:absolute;
-      top:-8px; left:50%;
-      width:10px; height:10px;
-      transform: translateX(-50%);
-      border-radius: 999px;
-      background: linear-gradient(135deg, var(--accent), var(--accent2));
-      box-shadow: 0 0 0 4px rgba(74,163,255,.14);
-    }
-    .milestoneLabel{
-      position:absolute;
-      top:-28px;
-      transform: translateX(-50%);
-      font-size:11px;
-      color: rgba(234,240,255,.80);
-      white-space:nowrap;
+    @media (max-width: 640px) {
+      .section { padding: 60px 20px; }
+      .hero { padding: 100px 20px 60px; }
     }
 
-    /* Grid blocks */
-    .grid2{ display:grid; grid-template-columns: 1fr 1fr; gap:18px; }
-    @media (max-width: 900px){ .grid2{ grid-template-columns: 1fr; } }
-    .block{ padding:18px; }
-    .block h3{ margin:0 0 10px; font-size:14px; color:var(--muted); font-weight:700; letter-spacing:.2px; }
-    ul{ margin:0; padding-left:18px; color:var(--muted); line-height:1.7; }
-    li{ margin:6px 0; }
+    .section-head {
+      display: flex;
+      align-items: baseline;
+      gap: 16px;
+      margin-bottom: 44px;
+    }
+    .section-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 11px;
+      font-weight: 400;
+      color: var(--gold);
+      letter-spacing: 2px;
+    }
+    h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 28px;
+      font-weight: 700;
+      letter-spacing: -.2px;
+    }
+    .section-rule {
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(to right, rgba(197,153,58,.35), transparent);
+    }
 
-    /* Footer */
-   footer.card{
-  margin-top:26px;
-  padding:18px;
-  background: rgba(255,255,255,.85);
-  border: 1px solid var(--line);
-  box-shadow: var(--shadow);
-  color: #1F2937;  /* solid charcoal */
-  font-size:13px;
-  text-align:center;
-}
+    /* ─── ABOUT ─── */
+    #about { border-top: 1px solid rgba(255,255,255,.07); }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+    }
+    @media (max-width: 720px) { .about-grid { grid-template-columns: 1fr; } }
+    .about-card {
+      background: rgba(255,255,255,.03);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 26px 28px;
+    }
+    .about-card h3 {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 14px;
+    }
+    .bullet-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .bullet-list li {
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+      font-size: 14.5px;
+      font-weight: 300;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+    .bullet-list li::before {
+      content: "—";
+      color: var(--gold);
+      flex-shrink: 0;
+      font-size: 12px;
+    }
 
-footer .fine{
-  color: #4B5563; /* readable muted grey */
-  font-size:12px;
-  margin-top:6px;
-}
+    /* ─── EXPERIENCE ─── */
+    #experience { border-top: 1px solid rgba(255,255,255,.07); }
+
+    .exp-list { display: flex; flex-direction: column; gap: 0; }
+
+    .exp-item {
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: 0;
+      position: relative;
+    }
+    @media (max-width: 760px) {
+      .exp-item { grid-template-columns: 1fr; }
+    }
+
+    /* Vertical spine */
+    .exp-item::before {
+      content: "";
+      position: absolute;
+      left: 219px;
+      top: 0; bottom: 0;
+      width: 1px;
+      background: rgba(197,153,58,.22);
+    }
+    @media (max-width: 760px) { .exp-item::before { display:none; } }
+
+    .exp-meta {
+      padding: 36px 28px 36px 0;
+      position: relative;
+    }
+    /* Dot on the spine */
+    .exp-meta::after {
+      content: "";
+      position: absolute;
+      right: -5px;
+      top: 44px;
+      width: 9px; height: 9px;
+      border-radius: 50%;
+      background: var(--gold);
+      box-shadow: 0 0 0 3px rgba(197,153,58,.20);
+    }
+    @media (max-width: 760px) { .exp-meta::after { display:none; } }
+
+    .exp-company {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 4px;
+    }
+    .exp-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 18px;
+      font-weight: 700;
+      line-height: 1.25;
+      margin-bottom: 8px;
+    }
+    .exp-dates {
+      font-size: 12.5px;
+      font-weight: 400;
+      color: var(--muted2);
+      letter-spacing: .3px;
+    }
+
+    .exp-content {
+      padding: 36px 0 36px 36px;
+      border-bottom: 1px solid rgba(255,255,255,.06);
+    }
+    @media (max-width: 760px) {
+      .exp-content { padding: 0 0 32px 0; }
+      .exp-meta { padding: 32px 0 12px 0; }
+    }
+    .exp-item:last-child .exp-content { border-bottom: none; }
+
+    .exp-achievement {
+      margin-bottom: 22px;
+    }
+    .exp-achievement:last-child { margin-bottom: 0; }
+
+    .ach-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .ach-title::before {
+      content: "";
+      width: 18px; height: 1px;
+      background: var(--gold);
+      flex-shrink: 0;
+    }
+    .ach-body {
+      font-size: 14px;
+      font-weight: 300;
+      color: var(--muted);
+      line-height: 1.75;
+      padding-left: 28px;
+    }
+
+    /* ─── COMPETENCIES ─── */
+    #competencies { border-top: 1px solid rgba(255,255,255,.07); }
+    .comp-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+    @media (max-width: 840px) { .comp-grid { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 520px) { .comp-grid { grid-template-columns: 1fr; } }
+
+    .comp-card {
+      background: rgba(255,255,255,.03);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 24px;
+      transition: border-color .25s, background .25s;
+    }
+    .comp-card:hover {
+      border-color: rgba(197,153,58,.30);
+      background: rgba(197,153,58,.04);
+    }
+    .comp-icon {
+      width: 36px; height: 36px;
+      border-radius: 6px;
+      background: rgba(197,153,58,.12);
+      border: 1px solid rgba(197,153,58,.25);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 14px;
+      font-size: 16px;
+    }
+    .comp-card h3 {
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 12px;
+      color: var(--text);
+      letter-spacing: .2px;
+    }
+    .comp-card ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+    .comp-card ul li {
+      font-size: 13px;
+      font-weight: 300;
+      color: var(--muted);
+      padding-left: 14px;
+      position: relative;
+      line-height: 1.55;
+    }
+    .comp-card ul li::before {
+      content: "·";
+      position: absolute;
+      left: 0;
+      color: var(--gold);
+      font-weight: 700;
+    }
+
+    /* ─── EDUCATION & TOOLS ─── */
+    #education { border-top: 1px solid rgba(255,255,255,.07); }
+    .edu-tools-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+    @media (max-width: 640px) { .edu-tools-grid { grid-template-columns: 1fr; } }
+
+    .edu-card, .tools-card {
+      background: rgba(255,255,255,.03);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 28px;
+    }
+    .edu-card h3, .tools-card h3 {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 18px;
+    }
+    .edu-degree {
+      font-family: 'Playfair Display', serif;
+      font-size: 20px;
+      font-weight: 700;
+      line-height: 1.3;
+      margin-bottom: 6px;
+    }
+    .edu-details {
+      font-size: 14px;
+      font-weight: 300;
+      color: var(--muted);
+    }
+    .edu-result {
+      display: inline-block;
+      margin-top: 12px;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 4px 12px;
+      border-radius: 3px;
+      background: rgba(197,153,58,.12);
+      border: 1px solid rgba(197,153,58,.30);
+      color: var(--gold2);
+      letter-spacing: .5px;
+    }
+
+    .tool-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(255,255,255,.06);
+      font-size: 14px;
+      font-weight: 300;
+      color: var(--muted);
+    }
+    .tool-row:last-child { border-bottom: none; }
+    .tool-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--gold);
+      flex-shrink: 0;
+    }
+
+    /* ─── CONTACT ─── */
+    #contact {
+      border-top: 1px solid rgba(255,255,255,.07);
+      background: linear-gradient(180deg, transparent, rgba(30,106,122,.06));
+    }
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+    @media (max-width: 640px) { .contact-grid { grid-template-columns: 1fr; } }
+    .contact-item {
+      background: rgba(255,255,255,.03);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 26px;
+    }
+    .contact-item h3 {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 14px;
+    }
+    .contact-item a {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+      font-weight: 400;
+      color: var(--text);
+      transition: color .2s;
+    }
+    .contact-item a:hover { color: var(--gold2); }
+    .contact-item p {
+      font-size: 14px;
+      font-weight: 300;
+      color: var(--muted);
+      margin-top: 8px;
+    }
+
+    /* ─── FOOTER ─── */
+    footer {
+      border-top: 1px solid rgba(255,255,255,.07);
+      padding: 32px 40px;
+      text-align: center;
+      font-size: 12.5px;
+      font-weight: 300;
+      color: var(--muted2);
+      letter-spacing: .3px;
+    }
+    footer span { color: var(--gold); }
+
+    /* ─── FADE-IN ─── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(22px);
+      transition: opacity .65s ease, transform .65s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: none;
+    }
   </style>
 </head>
-
 <body>
-  <div class="wrap">
-    <div class="topbar">
-      <div class="brand">
-        <span class="dot"></span>
-        <span>Mondeep Kumar</span>
-      </div>
-      <nav class="nav">
-        <a href="#about">About</a>
-        <a href="#timeline">Timeline</a>
-        <a href="#competencies">Competencies</a>
-        <a href="#education">Education</a>
-        <a href="#contact">Contact</a>
-      </nav>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-brand">MK</div>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#competencies">Competencies</a></li>
+      <li><a href="#education">Education</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+
+    <!-- decorative E/E circuit lines -->
+    <div class="hero-lines">
+      <svg viewBox="0 0 500 700" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="40" y="100" width="420" height="500" rx="4" stroke="white" stroke-width="1"/>
+        <line x1="40" y1="200" x2="460" y2="200" stroke="white" stroke-width="1"/>
+        <line x1="40" y1="350" x2="460" y2="350" stroke="white" stroke-width="1"/>
+        <line x1="40" y1="480" x2="460" y2="480" stroke="white" stroke-width="1"/>
+        <line x1="160" y1="100" x2="160" y2="600" stroke="white" stroke-width="1"/>
+        <line x1="320" y1="100" x2="320" y2="600" stroke="white" stroke-width="1"/>
+        <circle cx="160" cy="200" r="6" stroke="white" stroke-width="1"/>
+        <circle cx="160" cy="350" r="6" stroke="white" stroke-width="1"/>
+        <circle cx="160" cy="480" r="6" stroke="white" stroke-width="1"/>
+        <circle cx="320" cy="200" r="6" stroke="white" stroke-width="1"/>
+        <circle cx="320" cy="350" r="6" stroke="white" stroke-width="1"/>
+        <circle cx="320" cy="480" r="6" stroke="white" stroke-width="1"/>
+        <rect x="120" y="140" width="80" height="40" rx="3" stroke="white" stroke-width="1"/>
+        <rect x="280" y="140" width="80" height="40" rx="3" stroke="white" stroke-width="1"/>
+        <rect x="120" y="290" width="80" height="40" rx="3" stroke="white" stroke-width="1"/>
+        <rect x="280" y="290" width="80" height="40" rx="3" stroke="white" stroke-width="1"/>
+        <rect x="120" y="420" width="80" height="40" rx="3" stroke="white" stroke-width="1"/>
+        <rect x="280" y="420" width="80" height="40" rx="3" stroke="white" stroke-width="1"/>
+        <line x1="0" y1="50" x2="500" y2="50" stroke="white" stroke-width=".5" opacity=".5"/>
+        <line x1="0" y1="650" x2="500" y2="650" stroke="white" stroke-width=".5" opacity=".5"/>
+        <line x1="80" y1="0" x2="80" y2="700" stroke="white" stroke-width=".5" opacity=".3"/>
+        <line x1="420" y1="0" x2="420" y2="700" stroke="white" stroke-width=".5" opacity=".3"/>
+      </svg>
     </div>
 
-    <header class="hero">
-      <div class="card heroMain">
-        <div class="kicker">
-          <span>Vehicle Architecture • E/E • Systems Engineering</span>
-          <span style="opacity:.55">|</span>
-          <b>10+ years</b>
+    <div class="hero-inner">
+      <div>
+        <div class="hero-eyebrow">
+          <div class="eyebrow-line"></div>
+          <span class="eyebrow-text">Vehicle Architecture · E/E · Systems Engineering</span>
         </div>
 
-        <h1>Platform-level E/E Systems Engineer with a focus on robustness, diagnostics, and scalable architectures.</h1>
+        <h1>Mondeep<br><em>Kumar</em></h1>
 
-        <p class="lead">
-          Vehicle Architecture and Systems Engineering professional with experience at Jaguar Land Rover,
+        <p class="hero-lead">
+          Vehicle Architecture and Systems Engineering professional with over 10 years' experience at Jaguar Land Rover,
           specialising in platform-level electrical, electronic, and software-enabled system architectures.
-          Skilled in component capability definition, failure-mode thinking, and designing for diagnosability and reuse.
+          Demonstrated expertise in component capability definition, ensuring controllers are sufficiently robust,
+          diagnosable, and scalable to accommodate real-world operating conditions and future feature expansion.
         </p>
 
-        <div class="ctaRow">
-          <a class="btn primary" href="#timeline">View experience timeline</a>
-          <a class="btn" href="#contact">Get in touch</a>
-          <a class="btn" href="https://www.linkedin.com/in/mondeepkumar" target="_blank" rel="noreferrer">LinkedIn</a>
+        <div class="hero-cta">
+          <a class="btn-primary" href="#experience">View experience</a>
+          <a class="btn-ghost" href="https://www.linkedin.com/in/mondeepkumar" target="_blank" rel="noreferrer">↗ LinkedIn</a>
+          <a class="btn-ghost" href="#contact">Contact</a>
         </div>
-
-        <p class="fine">
-         
-        </p>
-<img 
-  src="assets/range-rover-sketch-bw.png" 
-  alt="" 
-  class="heroSketch"
-/>
-
-
-        
       </div>
 
-      <aside class="card heroSide">
-        <div class="mini">
-          <h3>Current focus</h3>
-          <div class="pillRow">
-            <span class="pill good">System behaviour definition</span>
-            <span class="pill good">Edge / degraded modes</span>
-            <span class="pill good">Design for diagnostics</span>
-            <span class="pill">E/E architecture</span>
+      <div class="hero-card">
+        <div class="hc-block">
+          <h4>Current focus</h4>
+          <div class="pill-grid">
+            <span class="pill hi">System behaviour definition</span>
+            <span class="pill hi">Edge &amp; degraded modes</span>
+            <span class="pill hi">Design for diagnostics</span>
+            <span class="pill">E/E Architecture</span>
             <span class="pill">DFMEA</span>
+            <span class="pill">SDV roadmap</span>
           </div>
         </div>
-
-        <div class="mini">
-          <h3>Tooling</h3>
-          <div class="pillRow">
-            <span class="pill">Excel / PowerPoint / Visio</span>
-            <span class="pill">Lucidcharts</span>
-            <span class="pill warn">JIRA</span>
+        <div class="hc-divider"></div>
+        <div class="hc-block">
+          <h4>Tooling</h4>
+          <div class="pill-grid">
+            <span class="pill">MS Office · Visio</span>
+            <span class="pill">LucidCharts</span>
             <span class="pill">Siemens Capital</span>
+            <span class="pill">JIRA · Confluence</span>
+            <span class="pill">Python</span>
           </div>
         </div>
-
-        <div class="mini">
-          <h3>Location</h3>
-          <div class="pillRow">
-            <span class="pill">UK (Coventry)</span>
+        <div class="hc-divider"></div>
+        <div class="hc-block">
+          <h4>Location &amp; status</h4>
+          <div class="pill-grid">
+            <span class="pill">Coventry, UK</span>
             <span class="pill">British</span>
+            <span class="pill">Full UK driving licence</span>
           </div>
         </div>
-      </aside>
-    </header>
+      </div>
+    </div>
+  </section>
 
-    <section id="about">
-      <div class="sectionHead">
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="section reveal">
+      <div class="section-head">
+        <span class="section-num">01</span>
         <h2>About</h2>
-        <p>What I do, in systems-engineering terms</p>
+        <div class="section-rule"></div>
       </div>
-
-      <div class="card block">
-        <ul>
-          <li>Define end-to-end electrical/electronic system behaviour across operational, environmental, and degraded scenarios.</li>
-          <li>Translate platform/vehicle requirements into component capability expectations, interfaces (connectivity), and constraints.</li>
-          <li>Lead system-level DFMEA and resilience strategy: edge cases, fault conditions, integration variability, graceful degradation.</li>
-          <li>Shape diagnostic strategies and fault containment to improve detectability and in-vehicle robustness.</li>
-          <li>Feed lessons learned into design rules and engineering tooling to prevent defect recurrence.</li>
-        </ul>
-      </div>
-    </section>
-
-    <section id="timeline">
-      <div class="sectionHead">
-        <h2>Experience timeline</h2>
-        <p>My Roadmap view</p>
-      </div>
-
-      <div class="card timelineCard">
-        <div class="timelineTop">
-          <div style="display:flex;flex-direction:column;gap:4px">
-            <div style="font-weight:700; letter-spacing:.2px;">Career roadmap</div>
-            <div style="color:var(--muted); font-size:13px;">Drag horizontally • Use zoom to scale the timeline</div>
-          </div>
-          <div class="zoom">
-            <span>Zoom</span>
-            <input id="zoom" type="range" min="70" max="140" value="100" />
-            <span id="zoomLabel">100%</span>
-          </div>
+      <div class="about-grid">
+        <div class="about-card">
+          <h3>Systems engineering</h3>
+          <ul class="bullet-list">
+            <li>Define end-to-end E/E system behaviour across operational, environmental, and degraded scenarios</li>
+            <li>Translate platform requirements into component capability expectations, interfaces, and constraints</li>
+            <li>Lead system-level DFMEA and resilience strategy: edge cases, fault conditions, graceful degradation</li>
+            <li>Shape diagnostic strategies and fault containment to improve detectability and in-vehicle robustness</li>
+          </ul>
         </div>
+        <div class="about-card">
+          <h3>Approach &amp; mindset</h3>
+          <ul class="bullet-list">
+            <li>Feed lessons learned into design rules and engineering tooling to prevent defect recurrence</li>
+            <li>Cross-functional governance with Network Architecture, packaging teams, and suppliers</li>
+            <li>Agile delivery: sprint planning, backlog management, definition of done, programme milestones</li>
+            <li>Alignment to Software Defined Vehicle roadmap and scalable architecture objectives</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
 
-        <div class="trackWrap">
-          <div class="track" id="track">
-            <div class="scale">
-              <div class="scaleLabels">
-                <span>1998</span><span>2006</span><span>2010</span><span>2021</span><span>Present</span>
+  <!-- EXPERIENCE -->
+  <section id="experience">
+    <div class="section reveal">
+      <div class="section-head">
+        <span class="section-num">02</span>
+        <h2>Experience</h2>
+        <div class="section-rule"></div>
+      </div>
+
+      <div class="exp-list">
+
+        <!-- JLR Systems -->
+        <div class="exp-item">
+          <div class="exp-meta">
+            <div class="exp-company">Jaguar Land Rover</div>
+            <div class="exp-title">EDS Concepts<br>Systems Engineer</div>
+            <div class="exp-dates">2021 — Present</div>
+          </div>
+          <div class="exp-content">
+            <div class="exp-achievement">
+              <div class="ach-title">End-to-End Systems Behaviour &amp; Component Capability Definition</div>
+              <div class="ach-body">
+                Owned multiple system-level epics ensuring end-to-end E/E controller capability across vehicle platforms. Decomposed high-level requirements into refined backlog items with clear acceptance criteria for component-level functions, ensuring EDS deliverables such as Cost &amp; Weight data were captured and cascaded. Developed sub-system schematics over sprint increments, ensuring work met definition of done for robustness across operational, environmental, and degraded conditions. Proactively managed cross-team dependencies with Network Architecture, NAIC (University of Warwick), and EDS packaging teams to ensure standards compliance and alignment to SDV roadmap epics.
               </div>
             </div>
-
-            <div class="lanes" id="lanes">
-              <!-- injected by JS -->
+            <div class="exp-achievement">
+              <div class="ach-title">Failure-Mode Robustness, Diagnostics &amp; Fault-Containment Strategy</div>
+              <div class="ach-body">
+                Led system-level DFMEA and translated failure modes into prioritised backlog items for diagnostic, fault containment, and controlled degradation strategies. Defined testable acceptance criteria for diagnostic coverage and edge case handling, ensuring validation readiness at system and vehicle level. Acted as technical owner for complex integration stories, resolving requirement ambiguity and dependency risks during delivery.
+              </div>
+            </div>
+            <div class="exp-achievement">
+              <div class="ach-title">Continuous Improvement Through Design Rules &amp; Engineering Tooling</div>
+              <div class="ach-body">
+                Fed learnings from development and validation into design rules and engineering software tools, preventing defect recurrence and driving continuous improvement in system quality, diagnostic maturity, and integration robustness across current and future programmes. Ensured robust features were delivered as sprint increments aligned to programme milestones and architectural scalability objectives.
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </section>
 
-    <section id="competencies">
-      <div class="sectionHead">
+        <!-- JLR Design -->
+        <div class="exp-item">
+          <div class="exp-meta">
+            <div class="exp-company">Jaguar Land Rover</div>
+            <div class="exp-title">EDS Electrical<br>Design Engineer</div>
+            <div class="exp-dates">Aug 2010 — Dec 2021</div>
+          </div>
+          <div class="exp-content">
+            <div class="exp-achievement">
+              <div class="ach-title">Electrical System Design &amp; Technical Delivery</div>
+              <div class="ach-body">
+                Delivered component-accurate electrical wiring schematics for D7a and MLA platforms, ensuring correct connectivity, validated load paths, compliant interfaces, and alignment to PCDS gateway milestones, to support seamless E/E system integration.
+              </div>
+            </div>
+            <div class="exp-achievement">
+              <div class="ach-title">Cross-Functional Engineering Collaboration &amp; Optimisation</div>
+              <div class="ach-body">
+                Worked closely with component owners, engineering teams, and suppliers to optimise electrical circuits, reduce harness complexity, and lower cost and weight while maintaining system robustness and supporting timely vehicle build and test activities.
+              </div>
+            </div>
+            <div class="exp-achievement">
+              <div class="ach-title">System Attribute Validation, Issue Resolution &amp; Programme Support</div>
+              <div class="ach-body">
+                Defined and validated key electrical attributes — including voltage drop, overcurrent protection, and connector specifications — while leading technical audits, resolving system-level issues via ECR/AIM processes, and providing requirement and specification input during RFQ development to support informed sourcing decisions.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- NHS -->
+        <div class="exp-item">
+          <div class="exp-meta">
+            <div class="exp-company">NHS · McKesson · Yorkshire &amp; Humber SHA</div>
+            <div class="exp-title">Data Business<br>Analyst</div>
+            <div class="exp-dates">Aug 2006 — Aug 2010</div>
+          </div>
+          <div class="exp-content">
+            <div class="exp-achievement">
+              <div class="ach-title">Large-Scale Data Quality Improvement &amp; Programme Success</div>
+              <div class="ach-body">
+                Co-ordinated nationwide data-cleansing and migration activities for NHS organisations across England and Wales, directly enabling the successful rollout of the Smartcard (Chip-and-PIN ID) programme and ensuring data accuracy critical to secure system access.
+              </div>
+            </div>
+            <div class="exp-achievement">
+              <div class="ach-title">High-Impact Analytical Insight &amp; Multi-Organisation Enablement</div>
+              <div class="ach-body">
+                Delivered analytical reports and tailored migration strategies that supported 70+ NHS organisations simultaneously, providing the timely, reliable information needed for each organisation to meet implementation deadlines and maintain day-to-day operational continuity.
+              </div>
+            </div>
+            <div class="exp-achievement">
+              <div class="ach-title">Stakeholder Engagement &amp; Operational Risk Reduction</div>
+              <div class="ach-body">
+                Worked closely with Account Managers and NHS HR departments to resolve issues rapidly, protect business continuity, and maintain system integrity. Produced high-quality documentation and governance processes that improved consistency, reduced rework, and strengthened data-handling practices across the programme.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- LEONI -->
+        <div class="exp-item">
+          <div class="exp-meta">
+            <div class="exp-company">LEONI Wiring Systems UK</div>
+            <div class="exp-title">Graduate Analyst Developer<br>/ Systems Analyst</div>
+            <div class="exp-dates">Oct 1998 — May 2006</div>
+          </div>
+          <div class="exp-content">
+            <div class="exp-achievement">
+              <div class="ach-title">Engineering Application Development &amp; Technical Ownership</div>
+              <div class="ach-body">
+                Designed, developed, and project-managed multiple engineering harness applications, delivering tools that improved design workflows, supported manufacturing processes, and enhanced overall engineering efficiency across teams.
+              </div>
+            </div>
+            <div class="exp-achievement">
+              <div class="ach-title">Requirements Analysis, Solution Design &amp; Multi-Site Implementation</div>
+              <div class="ach-body">
+                Captured and documented detailed business requirements through close collaboration with project managers and end-users, translating needs into robust technical solutions. Supported remote-site rollouts, ensuring smooth adoption, minimal disruption, and consistent deployment quality.
+              </div>
+            </div>
+            <div class="exp-achievement">
+              <div class="ach-title">Technical Support, Systems Reliability &amp; Continuous Operational Improvement</div>
+              <div class="ach-body">
+                Provided frontline support for PC, network, and application issues, performing software installations, upgrades, and configuration activities. Improved system reliability and user productivity by resolving issues quickly and maintaining stable, well-configured IT environments.
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- COMPETENCIES -->
+  <section id="competencies">
+    <div class="section reveal">
+      <div class="section-head">
+        <span class="section-num">03</span>
         <h2>Core competencies</h2>
-        <p>Systems engineering with Quality mindset</p>
+        <div class="section-rule"></div>
       </div>
-
-      <div class="grid2">
-        <div class="card block">
-          <h3>Systems engineering</h3>
+      <div class="comp-grid">
+        <div class="comp-card">
+          <div class="comp-icon">⚙</div>
+          <h3>Systems Engineering</h3>
           <ul>
-            <li>V-Model, functional decomposition, requirements & acceptance criteria</li>
-            <li>System behaviour and failure-mode definition</li>
-            <li>DFMEA leadership and mitigation closure</li>
+            <li>V-Model and functional decomposition</li>
+            <li>Requirements &amp; acceptance criteria</li>
+            <li>System behaviour definition</li>
+            <li>DFMEA leadership &amp; mitigation closure</li>
+          </ul>
+        </div>
+        <div class="comp-card">
+          <div class="comp-icon">⚡</div>
+          <h3>E/E Architecture</h3>
+          <ul>
+            <li>Platform-level E/E architecture</li>
+            <li>Component capability &amp; robustness</li>
+            <li>Interface and constraint definition</li>
+            <li>Software Defined Vehicle alignment</li>
+          </ul>
+        </div>
+        <div class="comp-card">
+          <div class="comp-icon">🔍</div>
+          <h3>Diagnostics &amp; Fault Strategy</h3>
+          <ul>
+            <li>Design for diagnostics</li>
+            <li>Fault containment strategies</li>
             <li>Safety-critical degraded-mode thinking</li>
+            <li>Edge case and integration risk</li>
           </ul>
         </div>
-
-        <div class="card block">
-          <h3>E/E architecture & governance</h3>
+        <div class="comp-card">
+          <div class="comp-icon">📐</div>
+          <h3>Governance &amp; Quality</h3>
           <ul>
-            <li>Platform-level E/E architecture, interfaces and constraints</li>
-            <li>Component capability & robustness definition</li>
-            <li>Design for diagnostics & fault containment</li>
-            <li>Cross-functional and supplier technical governance</li>
+            <li>Cross-functional &amp; supplier governance</li>
+            <li>Engineering tooling &amp; design rules</li>
+            <li>Design rule check reporting</li>
+            <li>Defect prevention &amp; quality improvement</li>
+          </ul>
+        </div>
+        <div class="comp-card">
+          <div class="comp-icon">🔄</div>
+          <h3>Agile Delivery</h3>
+          <ul>
+            <li>Sprint planning &amp; backlog management</li>
+            <li>JIRA / Confluence workflows</li>
+            <li>Dependency management</li>
+            <li>Programme milestone alignment</li>
+          </ul>
+        </div>
+        <div class="comp-card">
+          <div class="comp-icon">📊</div>
+          <h3>Requirements &amp; Tooling</h3>
+          <ul>
+            <li>Requirements management (JIRA/TRM)</li>
+            <li>Siemens Capital Suite</li>
+            <li>LucidCharts &amp; Visio schematics</li>
+            <li>Python scripting for data manipulation</li>
           </ul>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <section id="education">
-      <div class="sectionHead">
-        <h2>Education</h2>
-        <p>Academic foundation</p>
+  <!-- EDUCATION & TOOLS -->
+  <section id="education">
+    <div class="section reveal">
+      <div class="section-head">
+        <span class="section-num">04</span>
+        <h2>Education &amp; tools</h2>
+        <div class="section-rule"></div>
       </div>
-
-      <div class="card block">
-        <ul>
-          <li><b>BSc (Hons) Engineering Information Technology</b>, DeMontfort University, Leicester (1994–1998) — 2:1</li>
-        </ul>
+      <div class="edu-tools-grid">
+        <div class="edu-card">
+          <h3>Education</h3>
+          <div class="edu-degree">BSc (Hons) Engineering<br>Information Technology</div>
+          <div class="edu-details">De Montfort University, Leicester<br>1994 – 1998</div>
+          <div class="edu-result">Result: 2:1</div>
+        </div>
+        <div class="tools-card">
+          <h3>Software &amp; tooling</h3>
+          <div class="tool-row"><span class="tool-dot"></span> MS Word · Excel · PowerPoint · Visio</div>
+          <div class="tool-row"><span class="tool-dot"></span> LucidCharts — architecture diagrams</div>
+          <div class="tool-row"><span class="tool-dot"></span> Siemens Capital Suite — electrical architecture design</div>
+          <div class="tool-row"><span class="tool-dot"></span> JIRA · Confluence — Agile ceremonies &amp; management</div>
+          <div class="tool-row"><span class="tool-dot"></span> Python scripting — data manipulation</div>
+        </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <section id="contact">
-      <div class="sectionHead">
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="section reveal">
+      <div class="section-head">
+        <span class="section-num">05</span>
         <h2>Contact</h2>
-        <p></p>
+        <div class="section-rule"></div>
       </div>
-
-      <div class="grid2">
-        <div class="card block">
-          <h3>Preferred</h3>
-          <ul>
-            <li><a href="https://www.linkedin.com/in/mondeepkumar" target="_blank" rel="noreferrer">LinkedIn profile (Click)</a></li>
-            <li>Email (optional): <span style="color:var(--text)">munnykm@hotmail.com</span></li>
+      <div class="contact-grid">
+        <div class="contact-item">
+          <h3>Preferred channel</h3>
+          <a href="https://www.linkedin.com/in/mondeepkumar" target="_blank" rel="noreferrer">
+            ↗ linkedin.com/in/mondeepkumar
+          </a>
+          <p>Email: munnykm@hotmail.com</p>
+          <p style="margin-top:14px; font-size:13px;">References available on request.</p>
+        </div>
+        <div class="contact-item">
+          <h3>Personal details</h3>
+          <ul class="bullet-list" style="margin-top:4px;">
+            <li>Nationality: British</li>
+            <li>Location: Coventry, UK</li>
+            <li>Driving licence: Full and clean</li>
           </ul>
         </div>
-
-        <div class="card block">
-          <h3>Software Used</h3>
-          <ul>
-            <li>MS Word/ Excel/ Power Point/ Visio/ LucidCharts</li>
-            <li>Siemens Capital Suite: Electrical Architecture design</li>
-           <li>JIRA for Agile ceremonies Management</li> 
-          </ul>
-        </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <footer class="card">
-      <div>© <span id="year"></span> Mondeep Kumar • Strive to be the best version of yourself</div>
-      <div class="fine">Hosted on GitHub.</div>
-    </footer>
-  </div>
+  <!-- FOOTER -->
+  <footer>
+    © <span id="yr"></span> Mondeep Kumar &nbsp;·&nbsp; <em>Strive to be the best version of yourself</em>
+  </footer>
 
   <script>
-    // Timeline model (positions are percentages along the lane bar).
-    // You can edit these labels or add new roles/milestones.
-    const lanes = [
-      {
-        laneLabel: "Jaguar Land Rover",
-        laneSub: "Systems Eng",
-        items: [
-          { label: "EDS Electrical Systems Engineer", sub: "2021–Present", left: 72, width: 26, tone: "blue" }
-        ],
-        milestones: [
-          { at: 72, label: "2021" },
-          { at: 98, label: "Now" }
-        ]
-      },
-      {
-        laneLabel: "Jaguar Land Rover",
-        laneSub: "Design Eng",
-        items: [
-          { label: "EDS Electrical Design Engineer", sub: "2010–2021", left: 40, width: 32, tone: "purple" }
-        ],
-        milestones: [
-          { at: 40, label: "2010" },
-          { at: 72, label: "2021" }
-        ]
-      },
-      {
-        laneLabel: "NHS / Health IT",
-        laneSub: "Analytics",
-        items: [
-          { label: "Data / Business Analyst", sub: "2006–2010", left: 26, width: 14, tone: "green" }
-        ],
-        milestones: [
-          { at: 26, label: "2006" },
-          { at: 40, label: "2010" }
-        ]
-      },
-      {
-        laneLabel: "LEONI Wiring Systems",
-        laneSub: "Dev / Systems",
-        items: [
-          { label: "Graduate Analyst Developer / Systems Analyst", sub: "1998–2006", left: 6, width: 20, tone: "orange" }
-        ],
-        milestones: [
-          { at: 6, label: "1998" },
-          { at: 26, label: "2006" }
-        ]
-      }
-    ];
+    document.getElementById('yr').textContent = new Date().getFullYear();
 
-    const lanesEl = document.getElementById("lanes");
-
-    function render(){
-      lanesEl.innerHTML = "";
-      lanes.forEach((ln) => {
-        const lane = document.createElement("div");
-        lane.className = "lane";
-
-        const name = document.createElement("div");
-        name.className = "laneName";
-        name.innerHTML = `<div><b>${ln.laneLabel}</b><div style="margin-top:2px; font-size:12px; color:rgba(234,240,255,.70)">${ln.laneSub}</div></div>`;
-        lane.appendChild(name);
-
-        const bar = document.createElement("div");
-        bar.className = "laneBar";
-
-        // milestones
-        (ln.milestones || []).forEach(m => {
-          const ms = document.createElement("div");
-          ms.className = "milestone";
-          ms.style.left = `${m.at}%`;
-
-          const lbl = document.createElement("div");
-          lbl.className = "milestoneLabel";
-          lbl.style.left = `${m.at}%`;
-          lbl.textContent = m.label;
-
-          bar.appendChild(ms);
-          bar.appendChild(lbl);
-        });
-
-        // items
-        (ln.items || []).forEach(it => {
-          const item = document.createElement("div");
-          item.className = `item ${it.tone || "blue"}`;
-          item.style.left = `${it.left}%`;
-          item.style.width = `${it.width}%`;
-          item.innerHTML = `<span>${it.label}</span><span class="sub">${it.sub || ""}</span>`;
-          bar.appendChild(item);
-        });
-
-        lane.appendChild(bar);
-        lanesEl.appendChild(lane);
+    // Scroll reveal
+    const reveals = document.querySelectorAll('.reveal');
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
       });
-    }
-
-    render();
-
-    // Zoom control: scales the whole track (Office Timeline-ish “timeline zoom” feel).
-    const zoom = document.getElementById("zoom");
-    const zoomLabel = document.getElementById("zoomLabel");
-    const track = document.getElementById("track");
-
-    function setZoom(val){
-      zoomLabel.textContent = `${val}%`;
-      track.style.transformOrigin = "top left";
-      track.style.transform = `scale(${val/100})`;
-      // Keep layout stable: add bottom padding compensation
-      track.parentElement.style.paddingBottom = (val/100 > 1 ? (val-100) * 2 : 10) + "px";
-    }
-    zoom.addEventListener("input", (e) => setZoom(Number(e.target.value)));
-    setZoom(Number(zoom.value));
-
-    // Footer year
-    document.getElementById("year").textContent = new Date().getFullYear();
+    }, { threshold: 0.08 });
+    reveals.forEach(el => io.observe(el));
   </script>
+
 </body>
 </html>
